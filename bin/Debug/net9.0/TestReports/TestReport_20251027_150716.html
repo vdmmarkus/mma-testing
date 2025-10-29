@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<title>Test Report</title>
+<style>
+
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .summary { margin-bottom: 20px; }
+                .criteria-group { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; }
+                .test-case { margin: 10px 0; padding: 10px; border-left: 4px solid #ddd; }
+                .passed { border-left-color: #4CAF50; }
+                .failed { border-left-color: #f44336; }
+                .steps { margin-left: 20px; font-size: 0.9em; color: #666; }
+                .timestamp { color: #999; font-size: 0.8em; }
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background-color: #f5f5f5; }
+            
+</style>
+</head>
+<body>
+<h1>Test Execution Report</h1>
+<p>Generated: 27-10-2025 15:07:16</p>
+<p>Software Version: v0.95</p>
+<div class='summary'>
+<h2>Summary</h2>
+<table>
+<tr><th>Total Tests</th><th>Passed</th><th>Failed</th><th>Pass Rate</th></tr>
+<tr><td>6</td><td>6</td><td>0</td><td>100,0%</td></tr>
+</table>
+</div>
+<div class='criteria-group'>
+<h3>Acceptance Criteria AC-12.1</h3>
+<p>Een apotheker kan de voorgeschreven medicatie van een patiënt inzien.</p>
+<div class='test-case passed'>
+<h4>ApothecaryTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 47,17 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Log in als apotheker.</li>
+<li>Navigeer naar de inlogpagina.</li>
+<li>Log in als arts.</li>
+<li>Voer correcte patient gegevens in en klik op inloggen.</li>
+<li>Stap 1: Navigeer naar de pagina om medicijnen toe te voegen.</li>
+<li>Selecteer ibuprofen als medicijn, vul 67 in als hoeveelheid en 'test' als instructie.</li>
+<li>Assert: Verifieer dat de gebruiker is ingelogd.</li>
+<li>Klik op de logout knop.</li>
+<li>Stap 2: Vul het medicatievoorschrift formulier in met 'Test' als beschrijving.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_150448_PrescriptionTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+</div>
+<div class='criteria-group'>
+<h3>Acceptance Criteria AC-5.1</h3>
+<p>Een ingelogde patiënt kan een lijst van zijn/haar voorgeschreven medicatie zien.</p>
+<div class='test-case passed'>
+<h4>PrescriptionTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 29,60 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Log in als arts.</li>
+<li>Assert: Verifieer dat de gebruiker is uitgelogd en op een logout-pagina is.</li>
+<li>Navigeer naar de pagina om patiëntgegevens in te zien.</li>
+<li>Navigeer direct naar het medicatievoorschrift formulier.</li>
+<li>Zoek naar patiënt met zoekterm 'patient'.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_150517_LoginTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+<div class='test-case passed'>
+<h4>PrescriptionTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 5,58 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Log in als patiënt.</li>
+<li>Assert: Verifieer dat de gebruiker op de juiste error URL terechtkomt.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_150637_LoginTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+</div>
+<div class='criteria-group'>
+<h3>Acceptance Criteria AC-4.1</h3>
+<p>Een patiënt kan inloggen met een correcte gebruikersnaam en wachtwoord.</p>
+<div class='test-case passed'>
+<h4>LoginTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 49,79 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Verstuur het formulier zonder velden in te vullen.</li>
+<li>Navigeer naar de inlogpagina.</li>
+<li>Controleer op validatiefouten.</li>
+<li>Voer correcte patient gegevens in en klik op inloggen.</li>
+<li>Assert: Verifieer dat de gebruiker is doorgestuurd naar de juiste pagina URL.</li>
+<li>Assert: Verifieer dat de gebruiker is ingelogd.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_150607_LoginTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+<div class='test-case passed'>
+<h4>LoginTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 24,14 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Navigeer naar de inlogpagina.</li>
+<li>Voer incorrect wachtwoord in en klik op inloggen.</li>
+<li>Selecteer de patiënt om de medicatiegegevens te bekijken.</li>
+<li>Assert: Verifieer dat validatiefouten worden weergegeven voor lege verplichte velden.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_150631_PrescriptionTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+<div class='test-case passed'>
+<h4>LoginTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 24,92 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Navigeer naar de inlogpagina.</li>
+<li>Klik op inloggen met lege velden.</li>
+<li>Navigeer naar 'Mijn Voorgeschreven Medicatie'.</li>
+<li>Assert: Verifieer dat de patiënt is doorgestuurd naar de juiste pagina URL.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_150702_PrescriptionTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+</div>
+</body>
+</html>

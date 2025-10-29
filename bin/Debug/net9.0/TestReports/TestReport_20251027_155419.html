@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<title>Test Report</title>
+<style>
+
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .summary { margin-bottom: 20px; }
+                .criteria-group { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; }
+                .test-case { margin: 10px 0; padding: 10px; border-left: 4px solid #ddd; }
+                .passed { border-left-color: #4CAF50; }
+                .failed { border-left-color: #f44336; }
+                .steps { margin-left: 20px; font-size: 0.9em; color: #666; }
+                .timestamp { color: #999; font-size: 0.8em; }
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background-color: #f5f5f5; }
+            
+</style>
+</head>
+<body>
+<h1>Test Execution Report</h1>
+<p>Generated: 27-10-2025 15:54:19</p>
+<p>Software Version: v0.95</p>
+<div class='summary'>
+<h2>Summary</h2>
+<table>
+<tr><th>Total Tests</th><th>Passed</th><th>Failed</th><th>Pass Rate</th></tr>
+<tr><td>6</td><td>2</td><td>4</td><td>33,3%</td></tr>
+</table>
+</div>
+<div class='criteria-group'>
+<h3>Acceptance Criteria AC-4.1</h3>
+<p>Een patiënt kan inloggen met een correcte gebruikersnaam en wachtwoord.</p>
+<div class='test-case failed'>
+<h4>LoginTests</h4>
+<p>Status: Failed</p>
+<p>Duration: 24,89 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36</p>
+<p style='color: red;'>Error: The process cannot access the file 'C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251027_155317.html' because it is being used by another process.</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Navigeer naar de inlogpagina.</li>
+<li>Log in als arts.</li>
+<li>Log in als apotheker.</li>
+<li>Voer correcte patient gegevens in en klik op inloggen.</li>
+<li>Stap 1: Navigeer naar de pagina om medicijnen toe te voegen.</li>
+<li>Selecteer ibuprofen als medicijn, vul 67 in als hoeveelheid en 'test' als instructie.</li>
+<li>Assert: Verifieer dat de gebruiker is ingelogd.</li>
+<li>Klik op de logout knop.</li>
+<li>Stap 2: Vul het medicatievoorschrift formulier in met 'Test' als beschrijving.</li>
+<li>Assert: Verifieer dat de gebruiker is uitgelogd en op een logout-pagina is.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_155315_PrescriptionTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+<div class='test-case failed'>
+<h4>LoginTests</h4>
+<p>Status: Failed</p>
+<p>Duration: 4,05 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36</p>
+<p style='color: red;'>Error: Object reference not set to an instance of an object.</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Log in als arts.</li>
+<li>Navigeer naar de inlogpagina.</li>
+</ol>
+</div>
+</div>
+<div class='test-case failed'>
+<h4>LoginTests</h4>
+<p>Status: Failed</p>
+<p>Duration: 4,07 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36</p>
+<p style='color: red;'>Error: Object reference not set to an instance of an object.</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Navigeer naar de inlogpagina.</li>
+</ol>
+</div>
+</div>
+<div class='test-case failed'>
+<h4>LoginTests</h4>
+<p>Status: Failed</p>
+<p>Duration: 4,02 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36</p>
+<p style='color: red;'>Error: Object reference not set to an instance of an object.</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Navigeer naar de inlogpagina.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class='criteria-group'>
+<h3>Acceptance Criteria AC-5.1</h3>
+<p>Een ingelogde patiënt kan een lijst van zijn/haar voorgeschreven medicatie zien.</p>
+<div class='test-case passed'>
+<h4>PrescriptionTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 9,76 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Voer incorrect wachtwoord in en klik op inloggen.</li>
+<li>Log in als patiënt.</li>
+<li>Assert: Verifieer dat de gebruiker op de juiste error URL terechtkomt.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_155349_LoginTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+<div class='test-case passed'>
+<h4>PrescriptionTests</h4>
+<p>Status: Passed</p>
+<p>Duration: 10,12 seconds</p>
+<p>Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36</p>
+<div class='steps'>
+<h5>Test Steps:</h5>
+<ol>
+<li>Klik op inloggen met lege velden.</li>
+<li>Log in als arts.</li>
+<li>Assert: Verifieer dat de URL niet is veranderd (geen redirect).</li>
+<li>Assert: Verifieer dat er validatiefouten worden weergegeven.</li>
+</ol>
+</div>
+<p><a href='Screenshots/20251027_155403_LoginTests_Final.png' target='_blank'>View Screenshot</a></p>
+</div>
+</div>
+</body>
+</html>

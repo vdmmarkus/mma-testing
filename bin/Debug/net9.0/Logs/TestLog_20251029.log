@@ -1,0 +1,338 @@
+﻿[2025-10-29 08:41:40] [INFO] Initializing test LoginTests...
+[2025-10-29 08:41:40] [INFO] Initializing test ApothecaryTests...
+[2025-10-29 08:41:40] [INFO] Initializing test PrescriptionTests...
+[2025-10-29 08:41:40] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:41:40] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:41:40] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:41:46] [INFO] WebDriver successfully created
+[2025-10-29 08:41:46] [INFO] Test initialization successful
+[2025-10-29 08:41:46] [STEP] Navigeer naar de inlogpagina.
+[2025-10-29 08:41:46] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:41:48] [INFO] WebDriver successfully created
+[2025-10-29 08:41:48] [INFO] Test initialization successful
+[2025-10-29 08:41:48] [STEP] Log in als apotheker.
+[2025-10-29 08:41:48] [INFO] Navigating to login page
+[2025-10-29 08:41:48] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:41:49] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:41:49] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:41:50] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:41:50] [STEP] Voer correcte patient gegevens in en klik op inloggen.
+[2025-10-29 08:41:50] [INFO] Attempting to login with username: patient
+[2025-10-29 08:41:50] [INFO] WebDriver successfully created
+[2025-10-29 08:41:50] [INFO] Test initialization successful
+[2025-10-29 08:41:50] [STEP] Log in als arts.
+[2025-10-29 08:41:50] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:41:50] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:41:50] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084150_BeforeApothecaryLogin.png
+[2025-10-29 08:41:50] [INFO] Attempting to login as apothecary with username: apothecary
+[2025-10-29 08:41:50] [INFO] Attempting to login with username: apothecary
+[2025-10-29 08:41:51] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:41:52] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:41:52] [INFO] Attempting to login with username: doctor
+[2025-10-29 08:42:00] [INFO] Username entered
+[2025-10-29 08:42:00] [INFO] Password entered
+[2025-10-29 08:42:00] [INFO] Screenshot saved: before-login-click_20251029_084200.png
+[2025-10-29 08:42:01] [INFO] Username entered
+[2025-10-29 08:42:01] [INFO] Password entered
+[2025-10-29 08:42:01] [INFO] Screenshot saved: before-login-click_20251029_084201.png
+[2025-10-29 08:42:02] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:42:02] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:42:02] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:42:02] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:42:03] [INFO] Username entered
+[2025-10-29 08:42:03] [INFO] Password entered
+[2025-10-29 08:42:03] [INFO] Screenshot saved: before-login-click_20251029_084203.png
+[2025-10-29 08:42:03] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:42:03] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:42:04] [INFO] Current URL after login attempt: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:42:04] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:42:04] [INFO] Current URL after login attempt: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:42:04] [INFO] Waiting 2 seconds: giving time for login to complete
+[2025-10-29 08:42:05] [INFO] Current URL after login attempt: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:42:05] [STEP] Stap 1: Navigeer naar de pagina om medicijnen toe te voegen.
+[2025-10-29 08:42:06] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084206_AfterApothecaryLogin.png
+[2025-10-29 08:42:06] [INFO] Controleer of de login succesvol was.
+[2025-10-29 08:42:06] [INFO] Checking if user is logged in. Current URL: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:42:06] [ASSERT] Verifieer dat de gebruiker is ingelogd.
+[2025-10-29 08:42:06] [INFO] Huidige URL: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:42:06] [STEP] Klik op de logout knop.
+[2025-10-29 08:42:06] [INFO] Attempting to log out
+[2025-10-29 08:42:06] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084206_Step1_AddMedicineForm.png
+[2025-10-29 08:42:06] [STEP] Selecteer ibuprofen als medicijn, vul 67 in als hoeveelheid en 'test' als instructie.
+[2025-10-29 08:42:07] [INFO] Selected ibuprofen option: Ibuprofen (200mg)
+[2025-10-29 08:42:07] [INFO] Filled quantity field with value: 67
+[2025-10-29 08:42:12] [INFO] Clicked submit button by type='submit' on AddMedicineToPrescription page
+[2025-10-29 08:42:14] [STEP] Stap 2: Vul het medicatievoorschrift formulier in met 'Test' als beschrijving.
+[2025-10-29 08:42:14] [INFO] Current URL after first form submission: https://localhost:7058/Prescriptions/AddMedicineToPrescription
+[2025-10-29 08:42:14] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084214_Step2_PrescriptionForm.png
+[2025-10-29 08:42:14] [INFO] Not on the expected Prescriptions/new page, navigating there directly
+[2025-10-29 08:42:15] [INFO] Filled a date field with today's date
+[2025-10-29 08:42:16] [INFO] Filled a date field with today's date
+[2025-10-29 08:42:16] [INFO] Filled textarea in form with 'Test'
+[2025-10-29 08:42:16] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084216_CompletedPrescriptionForm.png
+[2025-10-29 08:42:16] [INFO] On prescription form page: True
+[2025-10-29 08:42:16] [INFO] Cleaning up test PrescriptionTests...
+[2025-10-29 08:42:16] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084216_PrescriptionTests_Final.png
+[2025-10-29 08:42:16] [INFO] User is logged in: False
+[2025-10-29 08:42:16] [INFO] Apothecary logged in: False
+[2025-10-29 08:42:16] [INFO] Not logged in after first attempt, trying direct navigation
+[2025-10-29 08:42:16] [INFO] Navigating to: https://localhost:7058/PatientInfo
+[2025-10-29 08:42:16] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084216.html
+[2025-10-29 08:42:16] [INFO] Test cleanup successful
+[2025-10-29 08:42:16] [INFO] Initializing test PrescriptionTests...
+[2025-10-29 08:42:16] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:42:16] [INFO] No logout button found, using direct URL navigation
+[2025-10-29 08:42:17] [INFO] Screenshot saved: PatientInfoPage_20251029_084217.png
+[2025-10-29 08:42:17] [INFO] Checking if user is logged in. Current URL: https://localhost:7058/PatientInfo
+[2025-10-29 08:42:18] [INFO] WebDriver successfully created
+[2025-10-29 08:42:18] [INFO] Test initialization successful
+[2025-10-29 08:42:18] [STEP] Log in als arts.
+[2025-10-29 08:42:18] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:42:19] [INFO] URL after logout: https://localhost:7058/Account/LogOut
+[2025-10-29 08:42:19] [INFO] Waiting 1 seconds: giving time for logout redirect to complete
+[2025-10-29 08:42:20] [ASSERT] Verifieer dat de gebruiker is uitgelogd en op een logout-pagina is.
+[2025-10-29 08:42:20] [INFO] Huidige URL na uitloggen: https://localhost:7058/Account/LogOut
+[2025-10-29 08:42:20] [INFO] Checking if user is logged in. Current URL: https://localhost:7058/Account/LogOut
+[2025-10-29 08:42:20] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:42:21] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:42:21] [INFO] Attempting to login with username: doctor
+[2025-10-29 08:42:28] [INFO] User is logged in: True
+[2025-10-29 08:42:28] [STEP] Navigeer naar de pagina om patiëntgegevens in te zien.
+[2025-10-29 08:42:28] [INFO] Navigating to: https://localhost:7058/PatientInfo
+[2025-10-29 08:42:29] [INFO] Screenshot saved: PatientInfoPage_20251029_084229.png
+[2025-10-29 08:42:29] [STEP] Zoek naar patiënt met zoekterm 'patient'.
+[2025-10-29 08:42:29] [INFO] Searching for patient with term: patient
+[2025-10-29 08:42:29] [INFO] Screenshot saved: BeforePatientSearch_20251029_084229.png
+[2025-10-29 08:42:29] [INFO] Entered search term: patient
+[2025-10-29 08:42:29] [INFO] Screenshot saved: AfterSearchTerm_20251029_084229.png
+[2025-10-29 08:42:30] [INFO] User is logged in: False
+[2025-10-29 08:42:30] [INFO] Cleaning up test LoginTests...
+[2025-10-29 08:42:30] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084230_LoginTests_Final.png
+[2025-10-29 08:42:30] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084230.html
+[2025-10-29 08:42:30] [INFO] Test cleanup successful
+[2025-10-29 08:42:30] [INFO] Initializing test LoginTests...
+[2025-10-29 08:42:30] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:42:31] [INFO] Username entered
+[2025-10-29 08:42:31] [INFO] Password entered
+[2025-10-29 08:42:31] [INFO] Screenshot saved: before-login-click_20251029_084231.png
+[2025-10-29 08:42:31] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:42:31] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:42:32] [INFO] WebDriver successfully created
+[2025-10-29 08:42:32] [INFO] Test initialization successful
+[2025-10-29 08:42:32] [STEP] Navigeer naar de inlogpagina.
+[2025-10-29 08:42:32] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:42:33] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:42:33] [INFO] Current URL after login attempt: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:42:33] [INFO] Starting URL: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:42:33] [STEP] Navigeer direct naar het medicatievoorschrift formulier.
+[2025-10-29 08:42:34] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:42:34] [STEP] Voer correcte patient gegevens in en klik op inloggen.
+[2025-10-29 08:42:34] [INFO] Attempting to login with username: patient
+[2025-10-29 08:42:35] [INFO] Form page URL: https://localhost:7058/Prescriptions/new
+[2025-10-29 08:42:35] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084235_BeforeSubmission.png
+[2025-10-29 08:42:35] [INFO] Found 2 form(s) on the page
+[2025-10-29 08:42:35] [STEP] Verstuur het formulier zonder velden in te vullen.
+[2025-10-29 08:42:35] [INFO] Clicked submit button by type='submit' for validation test
+[2025-10-29 08:42:35] [INFO] Submit button clicked: True
+[2025-10-29 08:42:38] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084238_AfterSubmission.png
+[2025-10-29 08:42:38] [STEP] Controleer op validatiefouten.
+[2025-10-29 08:42:38] [INFO] Current URL after submission: https://localhost:7058/Prescriptions/new
+[2025-10-29 08:42:38] [INFO] Still on form page: True
+[2025-10-29 08:42:44] [INFO] Username entered
+[2025-10-29 08:42:44] [INFO] Password entered
+[2025-10-29 08:42:45] [INFO] Screenshot saved: before-login-click_20251029_084245.png
+[2025-10-29 08:42:45] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:42:45] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:42:47] [INFO] Current URL after login attempt: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:42:47] [INFO] Waiting 1 seconds: giving time for redirect to complete
+[2025-10-29 08:42:48] [ASSERT] Verifieer dat de gebruiker is doorgestuurd naar de juiste pagina URL.
+[2025-10-29 08:42:48] [INFO] Huidige URL: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:42:48] [INFO] Verwachte URL: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:42:48] [ASSERT] Verifieer dat de gebruiker is ingelogd.
+[2025-10-29 08:42:48] [INFO] Checking if user is logged in. Current URL: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:42:48] [INFO] Validation error elements found: True
+[2025-10-29 08:42:55] [ERROR] Error during patient search: stale element reference: stale element not found
+  (Session info: chrome=141.0.7390.123); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+[2025-10-29 08:42:55] [INFO] Checking for search results
+[2025-10-29 08:42:58] [INFO] User is logged in: True
+[2025-10-29 08:42:58] [INFO] Cleaning up test LoginTests...
+[2025-10-29 08:42:58] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084258_LoginTests_Final.png
+[2025-10-29 08:42:58] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084258.html
+[2025-10-29 08:42:58] [INFO] Test cleanup successful
+[2025-10-29 08:42:58] [INFO] Initializing test LoginTests...
+[2025-10-29 08:42:58] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:43:00] [INFO] WebDriver successfully created
+[2025-10-29 08:43:00] [INFO] Test initialization successful
+[2025-10-29 08:43:00] [STEP] Navigeer naar de inlogpagina.
+[2025-10-29 08:43:00] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:43:02] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:43:03] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:43:03] [STEP] Voer incorrect wachtwoord in en klik op inloggen.
+[2025-10-29 08:43:03] [INFO] Attempting to login with username: patient
+[2025-10-29 08:43:05] [INFO] Has results container: False, Has table: False, Has patient text: True
+[2025-10-29 08:43:05] [INFO] Search returned results: True
+[2025-10-29 08:43:05] [STEP] Selecteer de patiënt om de medicatiegegevens te bekijken.
+[2025-10-29 08:43:05] [INFO] Confirming patient selection
+[2025-10-29 08:43:05] [INFO] Screenshot saved: BeforePatientConfirmation_20251029_084305.png
+[2025-10-29 08:43:08] [INFO] Invalid field markers found: False
+[2025-10-29 08:43:13] [INFO] Username entered
+[2025-10-29 08:43:13] [INFO] Password entered
+[2025-10-29 08:43:13] [INFO] Screenshot saved: before-login-click_20251029_084313.png
+[2025-10-29 08:43:13] [INFO] Found 0 element(s) with required attribute
+[2025-10-29 08:43:13] [INFO] Page contains validation text: True
+[2025-10-29 08:43:13] [ASSERT] Verifieer dat validatiefouten worden weergegeven voor lege verplichte velden.
+[2025-10-29 08:43:13] [INFO] Cleaning up test PrescriptionTests...
+[2025-10-29 08:43:13] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084313_PrescriptionTests_Final.png
+[2025-10-29 08:43:13] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:43:13] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:43:14] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084314.html
+[2025-10-29 08:43:14] [INFO] Test cleanup successful
+[2025-10-29 08:43:14] [INFO] Initializing test PrescriptionTests...
+[2025-10-29 08:43:14] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:43:15] [INFO] WebDriver successfully created
+[2025-10-29 08:43:15] [INFO] Test initialization successful
+[2025-10-29 08:43:15] [STEP] Log in als patiënt.
+[2025-10-29 08:43:15] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:43:15] [INFO] Current URL after login attempt: https://localhost:7058/?loginError=True&page=%2FIndex
+[2025-10-29 08:43:15] [INFO] Waiting 1 seconds: giving time for redirect to complete
+[2025-10-29 08:43:16] [ASSERT] Verifieer dat de gebruiker op de juiste error URL terechtkomt.
+[2025-10-29 08:43:16] [INFO] Huidige URL: https://localhost:7058/?loginError=True&page=%2FIndex
+[2025-10-29 08:43:16] [INFO] Verwachte URL: https://localhost:7058/?loginError=True&page=%2FIndex
+[2025-10-29 08:43:16] [INFO] Cleaning up test LoginTests...
+[2025-10-29 08:43:17] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:43:17] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084317_LoginTests_Final.png
+[2025-10-29 08:43:17] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084317.html
+[2025-10-29 08:43:17] [INFO] Test cleanup successful
+[2025-10-29 08:43:17] [INFO] Initializing test LoginTests...
+[2025-10-29 08:43:17] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:43:18] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:43:18] [INFO] Attempting to login with username: patient
+[2025-10-29 08:43:19] [INFO] WebDriver successfully created
+[2025-10-29 08:43:19] [INFO] Test initialization successful
+[2025-10-29 08:43:19] [STEP] Navigeer naar de inlogpagina.
+[2025-10-29 08:43:19] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:43:20] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:43:21] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:43:21] [STEP] Klik op inloggen met lege velden.
+[2025-10-29 08:43:21] [INFO] Attempting to login with username: 
+[2025-10-29 08:43:28] [INFO] Username entered
+[2025-10-29 08:43:28] [INFO] Password entered
+[2025-10-29 08:43:28] [INFO] Screenshot saved: before-login-click_20251029_084328.png
+[2025-10-29 08:43:28] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:43:28] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:43:30] [INFO] Current URL after login attempt: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:43:30] [STEP] Navigeer naar 'Mijn Voorgeschreven Medicatie'.
+[2025-10-29 08:43:30] [INFO] Navigating to: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:43:31] [INFO] Username entered
+[2025-10-29 08:43:31] [INFO] Password entered
+[2025-10-29 08:43:31] [ASSERT] Verifieer dat de patiënt is doorgestuurd naar de juiste pagina URL.
+[2025-10-29 08:43:32] [INFO] Screenshot saved: before-login-click_20251029_084332.png
+[2025-10-29 08:43:32] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:43:32] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:43:33] [INFO] Current URL: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:43:33] [INFO] Expected URL: https://localhost:7058/Prescriptions/MyPrescriptions
+[2025-10-29 08:43:33] [INFO] Cleaning up test PrescriptionTests...
+[2025-10-29 08:43:33] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084333_PrescriptionTests_Final.png
+[2025-10-29 08:43:33] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084333.html
+[2025-10-29 08:43:33] [INFO] Test cleanup successful
+[2025-10-29 08:43:33] [INFO] Initializing test PrescriptionTests...
+[2025-10-29 08:43:33] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:43:34] [INFO] Current URL after login attempt: https://localhost:7058/Account/Login
+[2025-10-29 08:43:34] [ASSERT] Verifieer dat de URL niet is veranderd (geen redirect).
+[2025-10-29 08:43:34] [ASSERT] Verifieer dat er validatiefouten worden weergegeven.
+[2025-10-29 08:43:35] [INFO] WebDriver successfully created
+[2025-10-29 08:43:35] [INFO] Test initialization successful
+[2025-10-29 08:43:35] [STEP] Log in als arts.
+[2025-10-29 08:43:35] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:43:35] [WARNING] Could not find standard confirm buttons, trying generic selection
+[2025-10-29 08:43:36] [INFO] Clicked on element containing 'patient' text
+[2025-10-29 08:43:36] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:43:37] [INFO] Screenshot saved: AfterPatientConfirmation_20251029_084337.png
+[2025-10-29 08:43:37] [INFO] Waiting 1 seconds: waiting for patient details to load
+[2025-10-29 08:43:37] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:43:37] [INFO] Attempting to login with username: doctor
+[2025-10-29 08:43:38] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084338_PatientMedicationView.png
+[2025-10-29 08:43:38] [ASSERT] Controleer of we de medicatiegegevens van de patiënt kunnen zien.
+[2025-10-29 08:43:38] [INFO] Checking for patient details
+[2025-10-29 08:43:39] [INFO] Cleaning up test LoginTests...
+[2025-10-29 08:43:39] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084339_LoginTests_Final.png
+[2025-10-29 08:43:39] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084339.html
+[2025-10-29 08:43:39] [INFO] Test cleanup successful
+[2025-10-29 08:43:47] [INFO] Username entered
+[2025-10-29 08:43:47] [INFO] Password entered
+[2025-10-29 08:43:48] [INFO] Screenshot saved: before-login-click_20251029_084348.png
+[2025-10-29 08:43:48] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:43:48] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:43:48] [INFO] Has details container: False, Has table: False, Has patient content: True, Not on search page: False
+[2025-10-29 08:43:48] [INFO] Checking for medication list
+[2025-10-29 08:43:50] [INFO] Current URL after login attempt: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:43:50] [STEP] Stap 1: Navigeer naar de pagina om medicijnen toe te voegen.
+[2025-10-29 08:43:51] [INFO] Current URL: https://localhost:7058/Prescriptions/AddMedicineToPrescription
+[2025-10-29 08:43:51] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084351_Step1_AddMedicinePage.png
+[2025-10-29 08:43:51] [INFO] --- ADD MEDICINE PAGE ANALYSIS ---
+[2025-10-29 08:43:51] [INFO] Select/dropdown elements found: 1
+[2025-10-29 08:43:51] [INFO] SELECT: ID='SelectedMedicineId', Name='SelectedMedicineId'
+[2025-10-29 08:43:51] [INFO]   Options count: 21
+[2025-10-29 08:43:51] [INFO] Selected ibuprofen option: Ibuprofen (200mg)
+[2025-10-29 08:43:51] [INFO] Input elements found: 5
+[2025-10-29 08:43:51] [INFO] INPUT: ID='', Name='__RequestVerificationToken', Type='hidden'
+[2025-10-29 08:43:51] [INFO] INPUT: ID='Quantity', Name='Quantity', Type='number'
+[2025-10-29 08:43:52] [INFO]   Filled quantity field with value: 67
+[2025-10-29 08:43:52] [INFO] INPUT: ID='', Name='__Invariant', Type='hidden'
+[2025-10-29 08:43:52] [INFO] INPUT: ID='Instructions', Name='Instructions', Type='text'
+[2025-10-29 08:43:52] [INFO] INPUT: ID='', Name='__RequestVerificationToken', Type='hidden'
+[2025-10-29 08:43:57] [INFO] Textarea elements found: 0
+[2025-10-29 08:43:57] [INFO] Looking for add/submit button on first page
+[2025-10-29 08:43:57] [INFO] Clicked submit button by type='submit' on first page
+[2025-10-29 08:43:58] [INFO] Has medication container: False, Has table: False, Has medication content: True
+[2025-10-29 08:43:58] [INFO] Has patient details: False
+[2025-10-29 08:43:58] [INFO] Has medication list: True
+[2025-10-29 08:43:58] [INFO] Not on search page anymore: False
+[2025-10-29 08:43:58] [INFO] Cleaning up test ApothecaryTests...
+[2025-10-29 08:43:58] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084358_ApothecaryTests_Final.png
+[2025-10-29 08:43:58] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084358.html
+[2025-10-29 08:43:58] [INFO] Test cleanup successful
+[2025-10-29 08:43:59] [STEP] Stap 2: Vul het medicatievoorschrift formulier in.
+[2025-10-29 08:43:59] [INFO] Current URL after first form submission: https://localhost:7058/Prescriptions/AddMedicineToPrescription
+[2025-10-29 08:43:59] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084359_Step2_PrescriptionFormPage.png
+[2025-10-29 08:43:59] [INFO] Not on the expected Prescriptions/new page, navigating there directly
+[2025-10-29 08:44:00] [INFO] --- NEW PRESCRIPTION PAGE ANALYSIS ---
+[2025-10-29 08:44:00] [INFO] Form found with action: https://localhost:7058/Account/Logout
+[2025-10-29 08:44:00] [INFO] Inputs in form: 1
+[2025-10-29 08:44:00] [INFO] INPUT: ID='', Name='__RequestVerificationToken', Type='hidden'
+[2025-10-29 08:44:05] [INFO] Textareas in form: 0
+[2025-10-29 08:44:10] [INFO] Selects in form: 0
+[2025-10-29 08:44:10] [INFO] Buttons in form: 1
+[2025-10-29 08:44:10] [INFO] BUTTON: Type='submit', Text='Log Out'
+[2025-10-29 08:44:10] [INFO] Cleaning up test PrescriptionTests...
+[2025-10-29 08:44:10] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084410_PrescriptionTests_Final.png
+[2025-10-29 08:44:11] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084411.html
+[2025-10-29 08:44:11] [INFO] Test cleanup successful
+[2025-10-29 08:44:11] [INFO] Initializing test PrescriptionTests...
+[2025-10-29 08:44:11] [INFO] Creating WebDriver instance for browser: Chrome
+[2025-10-29 08:44:12] [INFO] WebDriver successfully created
+[2025-10-29 08:44:12] [INFO] Test initialization successful
+[2025-10-29 08:44:12] [STEP] Log in als arts.
+[2025-10-29 08:44:12] [INFO] Navigating to: https://localhost:7058/Account/Login
+[2025-10-29 08:44:13] [INFO] Waiting 1 seconds: waiting for login page to load
+[2025-10-29 08:44:14] [INFO] Current URL after navigation: https://localhost:7058/Account/Login
+[2025-10-29 08:44:14] [INFO] Attempting to login with username: doctor
+[2025-10-29 08:44:24] [INFO] Username entered
+[2025-10-29 08:44:25] [INFO] Password entered
+[2025-10-29 08:44:25] [INFO] Screenshot saved: before-login-click_20251029_084425.png
+[2025-10-29 08:44:25] [INFO] Clicked button using locator By.CssSelector: button[type='submit'] on login form
+[2025-10-29 08:44:25] [INFO] Waiting 2 seconds: waiting for login to complete
+[2025-10-29 08:44:27] [INFO] Current URL after login attempt: https://localhost:7058/?page=%2FIndex
+[2025-10-29 08:44:27] [STEP] Navigeer naar de pagina om medicijnen toe te voegen.
+[2025-10-29 08:44:28] [ASSERT] Verifieer dat we op de juiste URL zijn.
+[2025-10-29 08:44:28] [INFO] Current URL: https://localhost:7058/Prescriptions/AddMedicineToPrescription
+[2025-10-29 08:44:28] [INFO] Expected URL: https://localhost:7058/Prescriptions/AddMedicineToPrescription
+[2025-10-29 08:44:28] [INFO] URL matches expected: True
+[2025-10-29 08:44:28] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084428_AddMedicineForm.png
+[2025-10-29 08:44:28] [INFO] Page has form element: True
+[2025-10-29 08:44:28] [INFO] Page has 1 select elements
+[2025-10-29 08:44:28] [ASSERT] Verifieer dat het formulier voor medicatieselectie wordt weergegeven.
+[2025-10-29 08:44:28] [INFO] Cleaning up test PrescriptionTests...
+[2025-10-29 08:44:28] [INFO] Screenshot saved to C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\Screenshots\20251029_084428_PrescriptionTests_Final.png
+[2025-10-29 08:44:29] [INFO] Test report generated: C:\Users\vdmma\MMA-tests\bin\Debug\net9.0\TestReports\TestReport_20251029_084429.html
+[2025-10-29 08:44:29] [INFO] Test cleanup successful
