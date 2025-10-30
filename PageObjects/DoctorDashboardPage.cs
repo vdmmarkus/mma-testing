@@ -21,40 +21,40 @@ namespace MMA_tests.PageObjects
         private readonly By _patientsTable = By.Id("patients-table");
         private readonly By _prescribeButton = By.LinkText("Voorschrijven");
         private readonly By _prescribeButtonFallback = By.XPath("//a[contains(text(),'Voorschrijven') or contains(text(),'Prescribe')]");
-        
+
         // Form field locators - consolidated to reduce redundancy
-        private readonly By[] _medicineNameLocators = new[] { 
-            By.Id("MedicineName"), 
+        private readonly By[] _medicineNameLocators = new[] {
+            By.Id("MedicineName"),
             By.Name("MedicineName"),
             By.Id("MedicationName"),
             By.Name("MedicationName")
         };
-        
-        private readonly By[] _dosageLocators = new[] { 
-            By.Id("Dosage"), 
+
+        private readonly By[] _dosageLocators = new[] {
+            By.Id("Dosage"),
             By.Name("Dosage")
         };
-        
-        private readonly By[] _frequencyLocators = new[] { 
-            By.Id("Frequency"), 
+
+        private readonly By[] _frequencyLocators = new[] {
+            By.Id("Frequency"),
             By.Name("Frequency")
         };
-        
-        private readonly By[] _instructionsLocators = new[] { 
-            By.Id("Instructions"), 
+
+        private readonly By[] _instructionsLocators = new[] {
+            By.Id("Instructions"),
             By.Name("Instructions")
         };
-        
-        private readonly By[] _startDateLocators = new[] { 
-            By.Id("StartDate"), 
+
+        private readonly By[] _startDateLocators = new[] {
+            By.Id("StartDate"),
             By.Name("StartDate")
         };
-        
-        private readonly By[] _endDateLocators = new[] { 
-            By.Id("EndDate"), 
+
+        private readonly By[] _endDateLocators = new[] {
+            By.Id("EndDate"),
             By.Name("EndDate")
         };
-        
+
         private readonly By _patientIdInput = By.Id("PatientId");
 
         public DoctorDashboardPage(IWebDriver driver) : base(driver) { }
@@ -64,8 +64,9 @@ namespace MMA_tests.PageObjects
         /// </summary>
         protected override bool IsInProtectedArea()
         {
-            return Driver.Url.Contains("/Prescriptions/new") || 
-                   Driver.Url.Contains("/Prescriptions/AddMedicineToPrescription");
+            return Driver.Url.Contains("/Prescriptions/new") ||
+                   Driver.Url.Contains("/Prescriptions/AddMedicineToPrescription") ||
+                   Driver.Url.Contains("/Prescriptions");
         }
 
         /// <summary>
@@ -93,11 +94,11 @@ namespace MMA_tests.PageObjects
         {
             NavigateTo(PrescriptionCreateUrl);
             WaitSeconds(1);
-            
+
             // Take a screenshot for debugging purposes
             TakeScreenshot("NavigateToNewPrescriptionForm");
         }
-        
+
         /// <summary>
         /// Navigates to the add medicine form
         /// </summary>
@@ -105,7 +106,7 @@ namespace MMA_tests.PageObjects
         {
             NavigateTo(AddMedicineUrl);
             WaitSeconds(1);
-            
+
             // Take a screenshot for debugging purposes
             TakeScreenshot("NavigateToAddMedicineForm");
         }
@@ -118,21 +119,21 @@ namespace MMA_tests.PageObjects
             TestLogger.LogInfo("--- Form Element Diagnostic Information ---");
             TestLogger.LogInfo($"Current URL: {Driver.Url}");
             TestLogger.LogInfo($"Page Title: {Driver.Title}");
-            
+
             try
             {
                 // Try to identify form elements with basic attributes
                 var formElements = Driver.FindElements(By.TagName("form"));
                 TestLogger.LogInfo($"Number of forms found: {formElements.Count}");
-                
+
                 if (formElements.Count > 0)
                 {
                     var form = formElements[0];
-                    
+
                     TestLogger.LogInfo($"Form ID: {form.GetAttribute("id")}");
                     TestLogger.LogInfo($"Form Action: {form.GetAttribute("action")}");
                     TestLogger.LogInfo($"Form Method: {form.GetAttribute("method")}");
-                    
+
                     // Log all input elements in the form
                     LogElements(form.FindElements(By.TagName("input")), "Input");
                     LogElements(form.FindElements(By.TagName("textarea")), "Textarea");
@@ -144,7 +145,7 @@ namespace MMA_tests.PageObjects
             {
                 TestLogger.LogError($"Error during form diagnostic logging: {ex.Message}");
             }
-            
+
             TestLogger.LogInfo("--- End of Form Element Diagnostic Information ---");
         }
 
@@ -154,7 +155,7 @@ namespace MMA_tests.PageObjects
         private void LogElements(IReadOnlyCollection<IWebElement> elements, string elementType)
         {
             TestLogger.LogInfo($"Number of {elementType} elements: {elements.Count}");
-            
+
             foreach (var element in elements)
             {
                 try
@@ -163,7 +164,7 @@ namespace MMA_tests.PageObjects
                     string name = element.GetAttribute("name") ?? "no-name";
                     string type = element.GetAttribute("type") ?? "no-type";
                     string text = elementType == "Button" ? element.Text : "";
-                    
+
                     if (string.IsNullOrEmpty(text))
                     {
                         TestLogger.LogInfo($"{elementType}: ID={id}, Name={name}, Type={type}");
@@ -182,15 +183,15 @@ namespace MMA_tests.PageObjects
         /// </summary>
         public bool HasPatientsTable()
         {
-            return IsElementDisplayed(_patientsTable) || 
+            return IsElementDisplayed(_patientsTable) ||
                    Driver.FindElements(By.TagName("table")).Count > 0;
         }
 
         /// <summary>
         /// Gets the number of patient rows in the table
-            /// </summary>
-            public int GetPatientCount()
-            {
+        /// </summary>
+        public int GetPatientCount()
+        {
             try
             {
                 return Driver.FindElements(CommonSelectors.TableRows).Count;
@@ -209,7 +210,7 @@ namespace MMA_tests.PageObjects
             var headers = Driver.FindElements(CommonSelectors.TableHeaders);
             return headers.Select(h => h.Text).ToList();
         }
-        
+
         /// <summary>
         /// Clicks the prescribe button for a patient
         /// </summary>
@@ -241,7 +242,7 @@ namespace MMA_tests.PageObjects
                         catch (Exception) { }
                     }
                 }
-                
+
                 // Try direct locators
                 if (IsElementDisplayed(_prescribeButton))
                 {
@@ -249,14 +250,14 @@ namespace MMA_tests.PageObjects
                     TestLogger.LogInfo("Clicked 'Voorschrijven' button directly");
                     return;
                 }
-                
+
                 if (IsElementDisplayed(_prescribeButtonFallback))
                 {
                     FindElement(_prescribeButtonFallback).Click();
                     TestLogger.LogInfo("Clicked prescribe button via XPath");
                     return;
                 }
-                
+
                 // Last resort - try all links
                 var allLinks = Driver.FindElements(By.TagName("a"));
                 foreach (var link in allLinks)
@@ -264,7 +265,7 @@ namespace MMA_tests.PageObjects
                     try
                     {
                         string text = link.Text.ToLower();
-                        if (text.Contains("voorschrijven") || 
+                        if (text.Contains("voorschrijven") ||
                             text.Contains("prescribe") ||
                             text.Contains("add medicine") ||
                             text.Contains("medicijn toevoegen"))
@@ -276,7 +277,7 @@ namespace MMA_tests.PageObjects
                     }
                     catch (Exception) { }
                 }
-                
+
                 TestLogger.LogError("Could not find prescribe button for patient");
                 throw new NoSuchElementException("Prescribe button not found");
             }
@@ -286,7 +287,7 @@ namespace MMA_tests.PageObjects
                 throw;
             }
         }
-        
+
         /// <summary>
         /// Finds an input element using multiple locators
         /// </summary>
@@ -303,7 +304,7 @@ namespace MMA_tests.PageObjects
                 }
                 catch (Exception) { }
             }
-            
+
             // Generic search as fallback
             var inputs = Driver.FindElements(By.TagName("input"));
             foreach (var input in inputs)
@@ -314,7 +315,7 @@ namespace MMA_tests.PageObjects
                     string name = input.GetAttribute("name")?.ToLower() ?? "";
                     string placeholder = input.GetAttribute("placeholder")?.ToLower() ?? "";
                     string type = input.GetAttribute("type") ?? "";
-                    
+
                     if (type != "submit" && type != "button" &&
                         (id.Contains(fieldName) || name.Contains(fieldName) || placeholder.Contains(fieldName)))
                     {
@@ -323,7 +324,7 @@ namespace MMA_tests.PageObjects
                 }
                 catch (Exception) { }
             }
-            
+
             // Check textareas too for instructions
             if (fieldName.Contains("instruction") || fieldName.Contains("notes") || fieldName.Contains("description"))
             {
@@ -334,7 +335,7 @@ namespace MMA_tests.PageObjects
                     {
                         string id = textarea.GetAttribute("id")?.ToLower() ?? "";
                         string name = textarea.GetAttribute("name")?.ToLower() ?? "";
-                        
+
                         if (id.Contains(fieldName) || name.Contains(fieldName))
                         {
                             return textarea;
@@ -342,7 +343,7 @@ namespace MMA_tests.PageObjects
                     }
                     catch (Exception) { }
                 }
-                
+
                 // If we still haven't found a match but we're looking for instructions,
                 // just take the first textarea
                 if (textareas.Count > 0)
@@ -350,21 +351,21 @@ namespace MMA_tests.PageObjects
                     return textareas[0];
                 }
             }
-            
+
             throw new NoSuchElementException($"Could not find input field for: {fieldName}");
         }
-        
+
         /// <summary>
         /// Fills the prescription form with the provided values
         /// </summary>
-        public void FillPrescriptionForm(string medicationName, string dosage, string frequency, 
+        public void FillPrescriptionForm(string medicationName, string dosage, string frequency,
                                          string instructions, string startDate = null, string endDate = null)
         {
             try
             {
                 TestLogger.LogInfo("Filling prescription form...");
                 TakeScreenshot("BeforeFillingForm");
-                
+
                 // Fill medication name
                 try
                 {
@@ -377,7 +378,7 @@ namespace MMA_tests.PageObjects
                 {
                     TestLogger.LogError($"Failed to enter medicine name: {ex.Message}");
                 }
-                
+
                 // Fill dosage
                 try
                 {
@@ -390,7 +391,7 @@ namespace MMA_tests.PageObjects
                 {
                     TestLogger.LogError($"Failed to enter dosage: {ex.Message}");
                 }
-                
+
                 // Fill frequency
                 try
                 {
@@ -403,7 +404,7 @@ namespace MMA_tests.PageObjects
                 {
                     TestLogger.LogError($"Failed to enter frequency: {ex.Message}");
                 }
-                
+
                 // Fill instructions
                 try
                 {
@@ -416,7 +417,7 @@ namespace MMA_tests.PageObjects
                 {
                     TestLogger.LogError($"Failed to enter instructions: {ex.Message}");
                 }
-                
+
                 // Optional fields
                 if (!string.IsNullOrEmpty(startDate))
                 {
@@ -432,7 +433,7 @@ namespace MMA_tests.PageObjects
                         TestLogger.LogInfo($"Could not set start date: {ex.Message}");
                     }
                 }
-                
+
                 if (!string.IsNullOrEmpty(endDate))
                 {
                     try
@@ -447,7 +448,7 @@ namespace MMA_tests.PageObjects
                         TestLogger.LogInfo($"Could not set end date: {ex.Message}");
                     }
                 }
-                
+
                 TestLogger.LogInfo("Completed filling prescription form");
                 TakeScreenshot("AfterFillingForm");
             }
@@ -457,7 +458,7 @@ namespace MMA_tests.PageObjects
                 throw;
             }
         }
-        
+
         /// <summary>
         /// Submits the prescription form
         /// </summary>
@@ -467,14 +468,14 @@ namespace MMA_tests.PageObjects
             {
                 TestLogger.LogInfo("Submitting prescription form...");
                 TakeScreenshot("BeforeSubmittingForm");
-                
+
                 // Use the common method from BasePage
                 bool clicked = ClickSubmitButton("on prescription form");
-                
+
                 if (!clicked)
                 {
                     TestLogger.LogWarning("Could not find standard submit button, trying to submit form directly");
-                    
+
                     try
                     {
                         var forms = Driver.FindElements(By.TagName("form"));
@@ -490,7 +491,7 @@ namespace MMA_tests.PageObjects
                         TestLogger.LogError($"Failed to submit form: {ex.Message}");
                     }
                 }
-                
+
                 WaitSeconds(2, "waiting for form submission to complete");
                 TakeScreenshot("AfterSubmittingForm");
             }
@@ -500,7 +501,89 @@ namespace MMA_tests.PageObjects
                 throw;
             }
         }
-        
+
+        /// <summary>
+        /// Selects medicine from dropdown
+        /// </summary>
+        public bool SelectMedicine(IWebElement select, string medicineName)
+        {
+            try
+            {
+                var options = select.FindElements(By.TagName("option"));
+
+                // Try to find and select by name first
+                foreach (var option in options)
+                {
+                    try
+                    {
+                        var optionText = option.Text.ToLower();
+                        if (optionText.Contains(medicineName.ToLower()))
+                        {
+                            option.Click();
+                            TestLogger.LogInfo($"Selected {medicineName} option: {option.Text}");
+                            return true;
+                        }
+                    }
+                    catch (Exception) { }
+                }
+
+                // If not found, select first valid (non-empty) option
+                for (int i = 1; i < options.Count; i++) // Start at 1 to skip placeholder
+                {
+                    try
+                    {
+                        var value = options[i].GetAttribute("value");
+                        if (!string.IsNullOrEmpty(value) && value != "0")
+                        {
+                            options[i].Click();
+                            TestLogger.LogInfo($"Could not find {medicineName}, selected: {options[i].Text}");
+                            return true;
+                        }
+                    }
+                    catch (Exception) { }
+                }
+            }
+            catch (Exception ex)
+            {
+                TestLogger.LogError($"Error selecting medicine: {ex.Message}");
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Selects patient from dropdown
+        /// </summary>
+        public bool SelectPatient(IWebElement select, string patientName)
+        {
+            try
+            {
+                var options = select.FindElements(By.TagName("option"));
+
+                foreach (var option in options)
+                {
+                    try
+                    {
+                        var optionText = option.Text.ToLower();
+
+                        if (optionText.Contains(patientName.ToLower()))
+                        {
+                            option.Click();
+                            TestLogger.LogInfo($"Selected patient: {option.Text}");
+                            return true;
+                        }
+                    }
+                    catch (Exception) { }
+                }
+            }
+            catch (Exception ex)
+            {
+                TestLogger.LogError($"Error selecting patient: {ex.Message}");
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Checks if the prescription form is displayed
         /// </summary>
@@ -508,26 +591,26 @@ namespace MMA_tests.PageObjects
         {
             TestLogger.LogInfo("Checking if prescription form is displayed...");
             TakeScreenshot("CheckingForPrescriptionForm");
-            
+
             // Check if we're on one of the prescription pages
-            bool isOnPrescriptionUrl = 
-                Driver.Url.Contains("/Prescriptions/new") || 
+            bool isOnPrescriptionUrl =
+                Driver.Url.Contains("/Prescriptions/new") ||
                 Driver.Url.Contains("/Prescriptions/AddMedicineToPrescription");
-                
+
             TestLogger.LogInfo($"URL check: {isOnPrescriptionUrl}, Current URL: {Driver.Url}");
-            
+
             // Look for form element
             bool hasFormElement = Driver.FindElements(By.TagName("form")).Count > 0;
             TestLogger.LogInfo($"Form element found: {hasFormElement}");
-            
+
             // Try to find at least one medicine input field
             bool hasMedicineInput = _medicineNameLocators.Any(locator => IsElementDisplayed(locator));
             TestLogger.LogInfo($"Medicine input field found: {hasMedicineInput}");
-            
-            return (isOnPrescriptionUrl && (hasFormElement || Driver.FindElements(By.TagName("input")).Count > 0)) || 
+
+            return (isOnPrescriptionUrl && (hasFormElement || Driver.FindElements(By.TagName("input")).Count > 0)) ||
                    hasMedicineInput;
         }
-        
+
         /// <summary>
         /// Checks if a success message is displayed
         /// </summary>
@@ -535,16 +618,16 @@ namespace MMA_tests.PageObjects
         {
             // Check for standard success message
             bool hasSuccessMessage = IsElementDisplayed(CommonSelectors.SuccessMessage);
-            
+
             // Check for any text that might indicate success
             if (!hasSuccessMessage)
             {
                 try
                 {
                     string pageSource = Driver.PageSource.ToLower();
-                    hasSuccessMessage = pageSource.Contains("success") || 
-                                       pageSource.Contains("successfully") || 
-                                       pageSource.Contains("saved") || 
+                    hasSuccessMessage = pageSource.Contains("success") ||
+                                       pageSource.Contains("successfully") ||
+                                       pageSource.Contains("saved") ||
                                        pageSource.Contains("created") ||
                                        pageSource.Contains("toegevoegd") ||
                                        pageSource.Contains("aangemaakt") ||
@@ -552,10 +635,10 @@ namespace MMA_tests.PageObjects
                 }
                 catch (Exception) { }
             }
-            
+
             return hasSuccessMessage;
         }
-        
+
         /// <summary>
         /// Gets the success message text
         /// </summary>
@@ -565,7 +648,7 @@ namespace MMA_tests.PageObjects
             {
                 return FindElement(CommonSelectors.SuccessMessage).Text;
             }
-            
+
             return string.Empty;
         }
     }

@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenQA.Selenium;
 using MMA_tests.PageObjects;
-using MMA_tests.Helpers;
 using MMA_tests.Utils;
 using Xunit;
 
@@ -14,9 +10,10 @@ namespace MMA_tests.Tests
         private readonly LoginPage _loginPage;
         private readonly ApothecaryDashboardPage _apothecaryDashboard;
 
-        // Constants - consider moving these to WebDriverConfig
+        // Constants
         private const string ApothecaryUsername = "apothecary";
         private const string ApothecaryPassword = "apothecary1";
+        private const string PatientSearchTerm = "patient";
 
         public ApothecaryTests() : base()
         {
@@ -24,103 +21,53 @@ namespace MMA_tests.Tests
             _apothecaryDashboard = new ApothecaryDashboardPage(Driver);
         }
 
-        /// <summary>
-        /// Helper method to login as apothecary
-        /// </summary>
-        private void LoginAsApothecary()
-        {
-            TestLogger.LogInfo("Navigating to login page");
-            _loginPage.Navigate();
-            
-            TakeScreenshot("BeforeApothecaryLogin");
-            
-            TestLogger.LogInfo($"Attempting to login as apothecary with username: {ApothecaryUsername}");
-            _loginPage.Login(ApothecaryUsername, ApothecaryPassword);
-            
-            WaitSeconds(2, "waiting for login to complete");
-            
-            TakeScreenshot("AfterApothecaryLogin");
-        }
-
         [Fact(DisplayName = "AC-12.1: Een apotheker kan de voorgeschreven medicatie van een patiënt inzien.")]
         public void TC_12_1_1_ApothecaryCanViewPatientMedication()
         {
-            // Arrange - Login
-            TestLogger.LogStep("Log in als apotheker.");
-            LoginAsApothecary();
-            
-            // Verify login was successful
-            TestLogger.LogInfo("Controleer of de login succesvol was.");
-            bool loggedIn = _apothecaryDashboard.IsUserLoggedIn();
-            TestLogger.LogInfo($"Apothecary logged in: {loggedIn}");
-            
-            // If not logged in, try again with direct navigation
-            if (!loggedIn)
-            {
-                TestLogger.LogInfo("Not logged in after first attempt, trying direct navigation");
-                _apothecaryDashboard.NavigateToPatientInfo();
-                
-                // If redirected to login, try one more time
-                if (Driver.Url.Contains("Account/Login"))
-                {
-                    TestLogger.LogInfo("Second login attempt");
-                    _loginPage.Login(ApothecaryUsername, ApothecaryPassword);
-                    WaitSeconds(1);
-                }
-            }
-            
-            // Final login check before proceeding
-            loggedIn = _apothecaryDashboard.IsUserLoggedIn() || !Driver.Url.Contains("Account/Login");
-            if (!loggedIn)
-            {
-                TestLogger.LogWarning("Login verification failed, but continuing with test for diagnostic purposes");
-            }
-            
-            // Act - Navigate to patient info and search
-            TestLogger.LogStep("Navigeer naar de pagina om patiëntgegevens in te zien.");
+            // ARRANGE - Log in as an apothecary
+            TestLogger.LogStep("Navigeer naar de loginpagina en log in als apotheker.");
+            _loginPage.Navigate();
+            _loginPage.Login(ApothecaryUsername, ApothecaryPassword);
+
+            // Wait for the page to process login and redirect
+            WaitSeconds(2, "wachten op login en doorverwijzing");
+            TakeScreenshot("AfterApothecaryLogin");
+
+            // ASSERT - Verify login was successful
+            Assert.True(_apothecaryDashboard.IsUserLoggedIn(), "De apotheker moet succesvol kunnen inloggen.");
+            Assert.False(UrlContainsOneOf("Account/Login"), "Na een succesvolle login mag de gebruiker niet op de loginpagina zijn.");
+
+            // ACT - Navigate to patient info and search for a patient
+            TestLogger.LogStep("Navigeer naar de patiëntinformatiepagina.");
             _apothecaryDashboard.NavigateToPatientInfo();
-            
-            // If not on patient info page, try another login and navigation
-            if (!Driver.Url.Contains("PatientInfo") && Driver.Url.Contains("Account/Login"))
-            {
-                TestLogger.LogInfo("Not on PatientInfo page, trying one more login");
-                _loginPage.Login(ApothecaryUsername, ApothecaryPassword);
-                WaitSeconds(1);
-                _apothecaryDashboard.NavigateToPatientInfo();
-            }
-            
-            // Search for patient
-            TestLogger.LogStep("Zoek naar patiënt met zoekterm 'patient'.");
-            _apothecaryDashboard.SearchForPatient("patient");
-            
-            // Check if we have search results
-            bool hasSearchResults = _apothecaryDashboard.HasSearchResults();
-            TestLogger.LogInfo($"Search returned results: {hasSearchResults}");
-            
-            // Select patient from search results
+
+            // ASSERT - Verify navigation was successful
+            Assert.True(UrlContainsOneOf("PatientInfo"), "De apotheker moet naar de patiëntinformatiepagina kunnen navigeren.");
+
+            // ACT - Search for and select a patient
+            TestLogger.LogStep($"Zoek naar patiënt met zoekterm '{PatientSearchTerm}'.");
+            _apothecaryDashboard.SearchForPatient(PatientSearchTerm);
+
+            // ASSERT - Verify we're still on the PatientInfo page after search
+            Assert.True(UrlContainsOneOf("PatientInfo"), "Na het zoeken moet de gebruiker op de patiëntinformatiepagina blijven.");
+
             TestLogger.LogStep("Selecteer de patiënt om de medicatiegegevens te bekijken.");
             _apothecaryDashboard.ConfirmPatientSelection();
-            
-            WaitSeconds(1, "waiting for patient details to load");
-            
-            // Take screenshot of the final view
+            WaitSeconds(1, "wachten tot patiëntdetails zijn geladen");
             TakeScreenshot("PatientMedicationView");
-            
-            // Assert - Check if we can see patient medication
-            TestLogger.LogAssert("Controleer of we de medicatiegegevens van de patiënt kunnen zien.");
-            
-            // Success is determined by having patient details or medication list
-            bool hasPatientDetails = _apothecaryDashboard.HasPatientDetails();
+
+            // ASSERT - Verify that patient medication details are visible
+            TestLogger.LogAssert("Controleer of de medicatiegegevens van de patiënt zichtbaar zijn.");
+
+            // A successful outcome is viewing the patient's medication list
             bool hasMedicationList = _apothecaryDashboard.HasMedicationList();
-            bool notOnSearchPage = !Driver.Url.EndsWith("/PatientInfo");
+            TestLogger.LogInfo($"Heeft medicatielijst: {hasMedicationList}");
+
+            // Main assertion - we should see the medication list after confirming
+            Assert.True(hasMedicationList, "De medicatielijst moet worden weergegeven na het selecteren van een patiënt.");
             
-            TestLogger.LogInfo($"Has patient details: {hasPatientDetails}");
-            TestLogger.LogInfo($"Has medication list: {hasMedicationList}");
-            TestLogger.LogInfo($"Not on search page anymore: {notOnSearchPage}");
-            
-            bool success = hasPatientDetails || hasMedicationList || notOnSearchPage;
-            
-            Assert.True(success, "De apotheker moet in staat zijn om de medicatiegegevens van de patiënt te bekijken.");
+            // URL should still be PatientInfo
+            Assert.True(UrlContainsOneOf("PatientInfo"), "De gebruiker moet op de patiëntinformatiepagina blijven na het selecteren van een patiënt.");
         }
     }
 }

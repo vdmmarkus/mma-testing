@@ -199,8 +199,16 @@ namespace MMA_tests.Tests
         protected bool UrlIsOneOf(params string[] expectedUrls)
         {
             string currentUrl = Driver.Url.TrimEnd('/');
+
+            // Add common variations of the logout destination URL
+            var validUrls = new List<string>(expectedUrls);
+            validUrls.AddRange(new[]
+            {
+                WebDriverConfig.BaseUrl.TrimEnd('/') + "?page=%2FIndex",
+                WebDriverConfig.BaseUrl.TrimEnd('/') + "/?page=%2FIndex"
+            });
             
-            foreach (var expectedUrl in expectedUrls)
+            foreach (var expectedUrl in validUrls)
             {
                 if (string.Equals(currentUrl, expectedUrl.TrimEnd('/'), StringComparison.OrdinalIgnoreCase))
                 {

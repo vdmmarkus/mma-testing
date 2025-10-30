@@ -102,3 +102,4 @@ C:\Users\vdmma\MMA-tests\obj\Debug\net9.0\refint\MMA-tests.dll
 C:\Users\vdmma\MMA-tests\obj\Debug\net9.0\MMA-tests.pdb
 C:\Users\vdmma\MMA-tests\obj\Debug\net9.0\MMA-tests.genruntimeconfig.cache
 C:\Users\vdmma\MMA-tests\obj\Debug\net9.0\ref\MMA-tests.dll
+C:\Users\vdmma\MMA-tests\obj\Debug\net9.0\MMA-tests.sourcelink.json

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MMA-tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c0a86795b8e018ed3a1da6d451176b459b5d926")]
 [assembly: System.Reflection.AssemblyProductAttribute("MMA-tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MMA-tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

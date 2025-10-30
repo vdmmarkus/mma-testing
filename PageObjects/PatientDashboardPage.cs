@@ -148,5 +148,29 @@ namespace MMA_tests.PageObjects
         }
         
         #endregion
+
+        #region Logout Method
+
+        /// <summary>
+        /// Logs out from the patient dashboard
+        /// </summary>
+        public void Logout()
+        {
+            TestLogger.LogInfo("Attempting to logout from patient dashboard");
+            
+            try
+            {
+                var logoutButton = FindElement(CommonSelectors.LogoutButton);
+                logoutButton.Click();
+                WaitSeconds(1, "waiting for logout to complete");
+            }
+            catch (Exception ex)
+            {
+                TestLogger.LogError($"Failed to logout: {ex.Message}");
+                throw;
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,166 +1,151 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
-using MMA_tests.Helpers;
 using MMA_tests.Utils;
+using MMA_tests.Helpers;
+using System.Threading;
+using System.Linq;
 
 namespace MMA_tests.PageObjects
 {
     public class LoginPage : BasePage
     {
+        private readonly By _usernameField = By.Id("Username");
+        private readonly By _passwordField = By.Id("Password");
+        private readonly By _loginButton = By.CssSelector("button[type='submit']");
+        private readonly By _validationSummary = By.CssSelector(".validation-summary-errors");
+        
         public static string LoginUrl => WebDriverConfig.BaseUrl + "Account/Login";
-
-        // Locators for login form elements
-        private readonly By _usernameInput = By.Id("Input_Email");
-        private readonly By _usernameInputAlt = By.Id("Username");
-        private readonly By _usernameInputByName = By.Name("Username");
         
-        private readonly By _passwordInput = By.Id("Input_Password");
-        private readonly By _passwordInputAlt = By.Id("Password");
-        private readonly By _passwordInputByName = By.Name("Password");
-        
-        // Login button is already covered by SubmitButton in CommonSelectors
-
         public LoginPage(IWebDriver driver) : base(driver) { }
 
-        /// <summary>
-        /// Navigates to the login page
-        /// </summary>
-        public void Navigate() 
+        public void Navigate()
         {
-            NavigateTo(LoginUrl);
+            TestLogger.LogInfo("Navigating to login page");
+            Driver.Navigate().GoToUrl(LoginUrl);
             WaitSeconds(1, "waiting for login page to load");
-            TestLogger.LogInfo($"Current URL after navigation: {Driver.Url}");
         }
 
-        /// <summary>
-        /// Finds username input field with multiple fallback strategies
-        /// </summary>
-        private IWebElement GetUsernameElement()
+        public bool IsOnLoginPage()
         {
-            // Try all possible username fields
-            By[] usernameCandidates = new[] { 
-                _usernameInput, _usernameInputAlt, _usernameInputByName,
-                By.Id("Email"), By.Name("Email")
-            };
-            
-            foreach (var locator in usernameCandidates)
+            try
             {
-                try
-                {
-                    if (IsElementDisplayed(locator))
-                    {
-                        return FindElement(locator);
-                    }
-                }
-                catch { }
+                return Driver.Url.Contains("/Account/Login") || 
+                       Driver.Url.Contains("/Identity/Account/Login");
             }
-            
-            throw new NoSuchElementException("Could not find username field");
-        }
-        
-        /// <summary>
-        /// Finds password input field with multiple fallback strategies
-        /// </summary>
-        private IWebElement GetPasswordElement()
-        {
-            // Try all possible password fields
-            By[] passwordCandidates = new[] { 
-                _passwordInput, _passwordInputAlt, _passwordInputByName
-            };
-            
-            foreach (var locator in passwordCandidates)
+            catch (Exception)
             {
-                try
-                {
-                    if (IsElementDisplayed(locator))
-                    {
-                        return FindElement(locator);
-                    }
-                }
-                catch { }
+                return false;
             }
-            
-            throw new NoSuchElementException("Could not find password field");
         }
 
-        /// <summary>
-        /// Logs in with the given username and password
-        /// </summary>
-        public void Login(string username, string password)
+        public void EnterCredentials(string username, string password)
         {
-            TestLogger.LogInfo($"Attempting to login with username: {username}");
+            TestLogger.LogInfo($"Entering credentials for user: {username}");
             
             try
             {
-                // Get elements using our more robust methods
-                var usernameElement = GetUsernameElement();
-                var passwordElement = GetPasswordElement();
-                
-                // Clear existing text first
-                usernameElement.Clear();
-                usernameElement.SendKeys(username);
-                TestLogger.LogInfo("Username entered");
-                
-                passwordElement.Clear();
-                passwordElement.SendKeys(password);
-                TestLogger.LogInfo("Password entered");
-                
-                // Take a screenshot before clicking login (useful for debugging)
-                TakeScreenshot("before-login-click");
-                
-                // Use common submit button click method
-                bool clicked = ClickSubmitButton("on login form");
-                
-                if (!clicked)
-                {
-                    TestLogger.LogWarning("Could not find standard submit button, trying to submit form directly");
-                    
-                    // Try to submit the form directly
-                    try
-                    {
-                        var form = Driver.FindElement(By.TagName("form"));
-                        form.Submit();
-                        TestLogger.LogInfo("Submitted login form directly");
-                    }
-                    catch (Exception ex)
-                    {
-                        TestLogger.LogError($"Failed to submit form: {ex.Message}");
-                        throw;
-                    }
-                }
-                
-                // Allow a moment for the login to process
-                WaitSeconds(2, "waiting for login to complete");
-                
-                TestLogger.LogInfo($"Current URL after login attempt: {Driver.Url}");
+                var usernameInput = FindElement(_usernameField);
+                var passwordInput = FindElement(_passwordField);
+
+                usernameInput.Clear();
+                usernameInput.SendKeys(username);
+
+                passwordInput.Clear();
+                passwordInput.SendKeys(password);
             }
             catch (Exception ex)
             {
-                TestLogger.LogError($"Exception during login: {ex.Message}");
+                TestLogger.LogError($"Failed to enter credentials: {ex.Message}");
                 throw;
             }
         }
 
-        /// <summary>
-        /// Checks if there are client-side validation errors on the login form
-        /// </summary>
-        public bool HasClientSideValidationErrors()
+        public void Login(string username, string password)
         {
-            return HasValidationErrors() || 
-                   Driver.PageSource.ToLower().Contains("veld is verplicht") ||
-                   Driver.PageSource.ToLower().Contains("field is required");
+            TestLogger.LogInfo($"Attempting login with username: {username}");
+            
+            try
+            {
+                EnterCredentials(username, password);
+
+                TakeScreenshot("before-login-click");
+                
+                // Try to click submit button
+                bool clicked = ClickSubmitButton("on login form");
+                
+                if (!clicked)
+                {
+                    TestLogger.LogError("Could not find submit button. Login will likely fail.");
+                }
+                
+                // Wait for redirect or error
+                WaitSeconds(2, "waiting for login to complete");
+                
+                // Log the result
+                if (IsOnLoginPage())
+                {
+                    TestLogger.LogError("Still on login page after attempt. Login may have failed.");
+                    if (HasLoginErrors())
+                    {
+                        TestLogger.LogError($"Login errors found: {GetLoginErrors()}");
+                    }
+                }
+                else
+                {
+                    TestLogger.LogInfo("Successfully navigated away from login page");
+                }
+            }
+            catch (Exception ex)
+            {
+                TestLogger.LogError($"Login failed: {ex.Message}");
+                throw;
+            }
         }
 
-        /// <summary>
-        /// Gets error messages from the login form
-        /// </summary>
-        public string GetErrorMessages()
+        public bool IsLoginErrorDisplayed()
         {
-            return GetValidationErrors();
+            return HasLoginErrors();
+        }
+
+        public bool HasLoginErrors()
+        {
+            return HasValidationErrors() ||
+                   Driver.Url.Contains("?loginError=True") ||
+                   Driver.Url.Contains("error=true");
+        }
+
+        public bool HasClientSideValidationErrors()
+        {
+            return IsElementDisplayed(By.CssSelector(".field-validation-error")) ||
+                   IsElementDisplayed(By.CssSelector(".validation-summary-errors"));
+        }
+
+        public string GetLoginErrors()
+        {
+            TestLogger.LogInfo("Checking for login error messages");
+            
+            try
+            {
+                // Check for validation errors
+                bool hasErrorMessages = HasValidationErrors();
+                
+                // Check URL parameters
+                bool hasLoginError = Driver.Url.Contains("?loginError=True");
+                bool hasGenericError = Driver.Url.Contains("error=true");
+                
+                if (!hasErrorMessages && !hasLoginError && !hasGenericError)
+                {
+                    return string.Empty;
+                }
+                
+                var errors = GetValidationErrors();
+                return errors.Any() ? string.Join(Environment.NewLine, errors) : "An unknown error occurred during login.";
+            }
+            catch (Exception ex)
+            {
+                TestLogger.LogError($"Error getting login errors: {ex.Message}");
+                return "Could not retrieve error messages.";
+            }
         }
     }
 }

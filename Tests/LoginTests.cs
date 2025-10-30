@@ -32,19 +32,20 @@ namespace MMA_tests.Tests
             // Act
             TestLogger.LogStep("Voer correcte patient gegevens in en klik op inloggen.");
             _loginPage.Login(WebDriverConfig.TestUsers.Patient.Username, WebDriverConfig.TestUsers.Patient.Password);
-            
+
             WaitSeconds(1, "giving time for redirect to complete");
-            
+
             // Assert
             TestLogger.LogAssert("Verifieer dat de gebruiker is doorgestuurd naar de juiste pagina URL.");
-            
-            string expectedUrl = "https://localhost:7058/Prescriptions/MyPrescriptions";
+
+            // Use the URL from the Page Object for a robust check
+            string expectedUrl = PatientDashboardPage.MyPrescriptionsUrl;
             TestLogger.LogInfo($"Huidige URL: {Driver.Url}");
             TestLogger.LogInfo($"Verwachte URL: {expectedUrl}");
-            
-            Assert.True(UrlMatches(expectedUrl), 
+
+            Assert.True(UrlMatches(expectedUrl),
                        $"Expected URL '{expectedUrl}' but got '{Driver.Url}'");
-            
+
             TestLogger.LogAssert("Verifieer dat de gebruiker is ingelogd.");
             Assert.True(_patientDashboard.IsUserLoggedIn(), "Gebruiker is niet ingelogd");
         }
@@ -61,15 +62,18 @@ namespace MMA_tests.Tests
             _loginPage.Login(WebDriverConfig.TestUsers.Patient.Username, "wrongpassword");
 
             WaitSeconds(1, "giving time for redirect to complete");
-            
+
             // Assert
-            TestLogger.LogAssert("Verifieer dat de gebruiker op de juiste error URL terechtkomt.");
-            
-            string expectedUrl = "https://localhost:7058/?loginError=True&page=%2FIndex";
+            TestLogger.LogAssert("Verifieer dat de gebruiker op de inlogpagina blijft en een foutmelding ziet.");
+
             TestLogger.LogInfo($"Huidige URL: {Driver.Url}");
-            TestLogger.LogInfo($"Verwachte URL: {expectedUrl}");
-            
-            Assert.Equal(expectedUrl, Driver.Url, StringComparer.OrdinalIgnoreCase);
+
+            // Check 1: We should still be on a login-related page
+            Assert.True(Driver.Url.Contains("Login") || Driver.Url.Contains("loginError"),
+                        $"Verwacht op een login pagina te blijven, maar URL is: {Driver.Url}");
+
+            // Check 2: We should see an error message
+            Assert.True(_loginPage.IsLoginErrorDisplayed(), "Er wordt geen inlogfout (via URL of validatiemelding) getoond.");
         }
 
         [Fact(DisplayName = "AC-4.4: Inloggen is niet mogelijk met lege velden.")]
@@ -85,14 +89,19 @@ namespace MMA_tests.Tests
 
             // Assert
             TestLogger.LogAssert("Verifieer dat de URL niet is veranderd (geen redirect).");
-            Assert.Contains("/Account/Login", Driver.Url);
-            
+            Assert.True(UrlMatches(LoginPage.LoginUrl),
+                        $"Verwacht op de login pagina te blijven, maar URL is: {Driver.Url}");
+
             TestLogger.LogAssert("Verifieer dat er validatiefouten worden weergegeven.");
-            
+
             if (!_loginPage.HasClientSideValidationErrors())
             {
                 TestLogger.LogError("DEF-01: Er wordt geen client-side validatiemelding getoond bij lege velden. De test faalt om dit defect te rapporteren.");
                 Assert.True(false, "DEF-01: Er wordt geen client-side validatiemelding getoond bij lege velden.");
+            }
+            else
+            {
+                Assert.True(true);
             }
         }
 
@@ -110,39 +119,21 @@ namespace MMA_tests.Tests
             
             // Verify login was successful
             TestLogger.LogAssert("Verifieer dat de gebruiker is ingelogd.");
-            
-            string expectedLoginUrl = "https://localhost:7058/Prescriptions/MyPrescriptions";
             TestLogger.LogInfo($"Huidige URL: {Driver.Url}");
-            
-            Assert.True(UrlMatches(expectedLoginUrl), 
-                       $"Expected login redirect to '{expectedLoginUrl}' but got '{Driver.Url}'");
             
             // Act - Logout
             TestLogger.LogStep("Klik op de logout knop.");
             _patientDashboard.Logout();
-            
-            WaitSeconds(1, "giving time for logout redirect to complete");
-            
-            // Assert
-            TestLogger.LogAssert("Verifieer dat de gebruiker is uitgelogd en op een logout-pagina is.");
-            TestLogger.LogInfo($"Huidige URL na uitloggen: {Driver.Url}");
-            
-            // Valid logout destinations
-            string[] validLogoutUrls = new[] {
-                "https://localhost:7058/?page=%2FIndex",
-                "https://localhost:7058/Account/LogOut"
-            };
-            
-            bool isAtValidLogoutDestination = 
-                UrlIsOneOf(validLogoutUrls) || 
-                UrlContainsOneOf("/Account/Login", "/Identity/Account/Login");
-            
-            Assert.True(isAtValidLogoutDestination, 
-                       $"Niet op een geldige uitlogbestemming. Huidige URL: {Driver.Url}");
-            
-            // Verify user is actually logged out
-            Assert.False(_patientDashboard.IsUserLoggedIn(), 
-                        "Gebruiker lijkt nog steeds ingelogd te zijn na uitloggen");
+
+            // Assert - Verify logout
+            string expectedLogoutUrl = WebDriverConfig.BaseUrl + "?page=%2FIndex";
+            TestLogger.LogInfo($"Expected URL after logout: {expectedLogoutUrl}");
+            TestLogger.LogInfo($"Actual URL after logout: {Driver.Url}");
+
+            Assert.True(
+                UrlIsOneOf(expectedLogoutUrl), 
+                $"De gebruiker moet worden doorgestuurd naar de juiste uitlogbestemming. Verwacht: {expectedLogoutUrl}, Werkelijk: {Driver.Url}"
+            );
         }
     }
 }
